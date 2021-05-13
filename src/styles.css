@@ -18354,6 +18354,11 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+.contThumb{
+  width: 70px;
+  height: 70px;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
