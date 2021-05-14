@@ -8,7 +8,7 @@ const Main = () => {
             <div className="grid grid-cols-3 gap-5 px-5 pb-8 relative mx-auto">
                 {
                     contents.map((content, i) => (
-                        <div className="relative pt-5">
+                        <div key={content._id} className="relative pt-5">
                             <div className="contThumb absolute left-1/2 top-0 transform -translate-x-1/2 shadow-contentShadow rounded-lg cursor-pointer">
                                 <img className="contThumb object-cover rounded-lg" src={content.thumbnail} alt={content.name} />
                             </div>  

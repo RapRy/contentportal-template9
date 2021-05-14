@@ -13,10 +13,13 @@ const dataSlice = createSlice({
 
             state.categories = categories
             state.contents = contents
+        },
+        updateContents: (state, action) => {
+            state.contents = action.payload
         }
     }
 })
 
-export const { fetchData } = dataSlice.actions
+export const { fetchData, updateContents } = dataSlice.actions
 
 export default dataSlice.reducer
