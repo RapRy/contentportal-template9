@@ -7,4 +7,21 @@
         width: 70px;
         height: 70px;
     }
+
+    .minHeight-144{
+        min-height: 144px;
+    }
+
+    .previewThumb{
+        width: 90px;
+        height: 90px;
+        left: calc(75% - 45px);
+        bottom: 54px;
+    }
+
+    .previewP{
+        bottom: 54px;
+        right: calc(25% + 60px);
+        left: 20px;
+    }
 }

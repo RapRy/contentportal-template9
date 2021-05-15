@@ -8,6 +8,7 @@ import * as api from './api'
 import Header from './components/Header/Header'
 import Navigation from './components/Navigation/Navigation'
 import Main from './components/Main/Main'
+import Preview from './components/Preview/Preview'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
       <Header />
       <Navigation />
       <Main />
+      <Preview />
     </div>
   );
 }

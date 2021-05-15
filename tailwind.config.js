@@ -3,8 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      darkRed: "rgba(106, 4, 15, 0.9)",
-      lightRed: "rgba(220, 47, 2, 0.9)",
+      darkRed: "rgb(106, 4, 15)",
+      lightRed: "rgb(220, 47, 2)",
+      blackOpac: "rgba(0, 0, 0, .63)",
       orange: "#F48C06",
       yellow: "#FFC700",
       black: "#283618",
