@@ -23,7 +23,7 @@ const Main = () => {
                                 <img className="contThumb object-cover rounded-lg" src={content.thumbnail} alt={content.name} />
                             </div>  
                             <div className="px-2 pb-2 pt-16 5 h-full bg-white rounded-lg shadow-contentShadow">
-                                <button className="font-rubik font-normal text-white bg-lightRed py-1 px-2.5 rounded-md text-sm block mb-2.5 text-center">Download</button>
+                                <button className="font-rubik font-normal text-white bg-lightRed py-1 px-2.5 rounded-md text-sm block mb-2.5 mx-auto">Download</button>
                                 <p className="font-rubik font-medium text-sm text-center">{content.name}</p>
                             </div>
                         </div>
