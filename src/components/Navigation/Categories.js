@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
+
+import { NavLink } from 'react-router-dom'
 
 import * as api from '../../api'
-import { updateContents } from '../../redux/dataReducer'
+import { updateContents, updateDetails } from '../../redux/dataReducer'
 
 import Subcategories from './Subcategories'
 
-const Categories = () => {
+const Categories = ({ setNavToggle }) => {
     const dispatch = useDispatch()
     const { categories } = useSelector(state => state.data)
+
+    const catMatch = useRouteMatch('/Category/:cat/:subcat') || { params: { cat: null } }
 
     const [activeSubcat, setActiveSubcat] = useState("")
     const [newCats, setNewCats] = useState([])
@@ -20,6 +25,7 @@ const Categories = () => {
     }
 
     const showSubCats = (ind, catName) => {
+
         let modCats = []
 
         newCats.forEach((cat, i) => {
@@ -30,25 +36,43 @@ const Categories = () => {
 
         setActiveSubcat(modCats[ind].subCategories[0]._id)
         setNewCats(modCats)
+
+        dispatch(updateDetails([]))
     }
 
     useEffect(() => {
         let modCats = []
 
-        categories.forEach((cat, iCat) => {
+        const catName = catMatch.params.cat
+        const subcatName = catMatch.params.subcat
 
-            const category = { ...cat, active: (iCat === 0) ? true : false }
+        if(catName != null){
+            categories.forEach((cat, iCat) => {
+                const category = { ...cat, active: (catName === cat.catName) ? true : false }
 
-            modCats.push(category)
+                modCats.push(category)
 
-            cat.subCategories.forEach(({ _id }, iSub) => {
-                (iCat === 0 && iSub === 0) && setActiveSubcat(_id)
+                cat.subCategories.forEach(({ _id, subCatName }, iSub) => {
+                    (catName === cat.catName && subCatName === subcatName) && setActiveSubcat(_id) 
+                })
             })
-        })
 
-        setNewCats(modCats)
+            setNewCats(modCats)
+        }
 
-    }, [categories])
+        // categories.forEach((cat, iCat) => {
+
+        //     const category = { ...cat, active: (iCat === 0) ? true : false }
+
+        //     modCats.push(category)
+
+        //     cat.subCategories.forEach(({ _id }, iSub) => {
+        //         (iCat === 0 && iSub === 0) && setActiveSubcat(_id)
+        //     })
+        // })
+
+
+    }, [categories, catMatch.params.cat, catMatch.params.subcat])
 
     return (
         <div>
@@ -56,9 +80,11 @@ const Categories = () => {
                 newCats.map((cat, i) => (
                     <div key={cat._id}>
                         <div className="block py-2.5 px-5 relative top-0 left-0 z-20">
-                            <button onClick={() => showSubCats(i, cat.catName)} className={`font-rubik bg-none cursor-pointer font-bold text-xl ${cat.active === false ? "text-black" : "text-gray-2"}`}>{cat.catName}</button>
+                            <NavLink to={ `/Category/${cat.catName}/${cat.subCategories[0].subCatName}` }>
+                                <button onClick={() => showSubCats(i, cat.catName)} className={`font-rubik bg-none cursor-pointer font-bold text-xl ${cat.active === false ? "text-black" : "text-gray-2"}`}>{cat.catName}</button>
+                            </NavLink>
                         </div>
-                        <Subcategories cat={cat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} />
+                        <Subcategories cat={cat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} setNavToggle={setNavToggle} />
                     </div>
                 ))
             }

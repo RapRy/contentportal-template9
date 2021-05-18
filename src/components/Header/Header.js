@@ -12,7 +12,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(setHeight(headerRef.current.clientHeight))
-    }, [height])
+    }, [height, dispatch])
 
     return (
         <div ref={headerRef} className="bg-gradient-to-r from-darkRed to-lightRed px-5 pt-7 pb-12">

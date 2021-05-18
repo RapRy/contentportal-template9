@@ -17,12 +17,12 @@ const dataSlice = createSlice({
         updateContents: (state, action) => {
             state.contents = action.payload
         },
-        fetchDetails: (state, action) => {
+        updateDetails: (state, action) => {
             state.selectedContent = action.payload
         }
     }
 })
 
-export const { fetchData, updateContents, fetchDetails } = dataSlice.actions
+export const { fetchData, updateContents, updateDetails } = dataSlice.actions
 
 export default dataSlice.reducer

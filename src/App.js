@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { fetchData } from './redux/dataReducer'
 
@@ -14,7 +15,6 @@ function App() {
 
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     try {
       const fetchInitial = async () => {
@@ -24,17 +24,31 @@ function App() {
       }
 
       fetchInitial()
+
     } catch (error) {
       console.log(error)
     }
+
+    
   }, [dispatch])
 
   return (
     <div>
-      <Header />
-      <Navigation />
-      <Main />
-      <Preview />
+      <Router>
+        <Header />
+        <Navigation />
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/Category/Games/Arcade" />
+          </Route>
+          <Route exact path="/Category/:cat/:subcat">
+            <Main />
+          </Route>
+          <Route exact path="/Content/:id">
+            <Preview />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

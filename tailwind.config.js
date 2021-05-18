@@ -13,7 +13,8 @@ module.exports = {
         '1': "#D4CECE",
         '2': "#878787"
       },
-      white: "#fff"
+      white: "#fff",
+      audioBg: "#f2f2f2"
     },
     boxShadow: {
       navShadow: "0px 0px 20px rgba(0, 0, 0, 0.35)",

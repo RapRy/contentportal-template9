@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import * as api from '../../api'
-import { updateContents } from '../../redux/dataReducer'
+import { updateContents, updateDetails } from '../../redux/dataReducer'
 
-const Subcategories = ({ cat, setActiveSubcat, activeSubcat }) => {
+const Subcategories = ({ cat, setActiveSubcat, activeSubcat, setNavToggle }) => {
     const dispatch = useDispatch()
     const [active, set] = useState(false)
 
@@ -18,8 +19,10 @@ const Subcategories = ({ cat, setActiveSubcat, activeSubcat }) => {
         const { data } = await api.updateContentsViaSubcat(subCatName, catName)
 
         dispatch(updateContents(data))
+        dispatch(updateDetails([]))
 
         setActiveSubcat(_id)
+        setNavToggle(false)
     }
 
     useEffect(() => {
@@ -31,7 +34,9 @@ const Subcategories = ({ cat, setActiveSubcat, activeSubcat }) => {
             {
                 cat.subCategories.map(({ _id, subCatName, catName }) => (
                     <animated.div key={_id} className="inline-block px-2.5 py-3.5" style={animation}>
-                        <button onClick={() => updateContentsViaSubcat(_id, subCatName, catName)} className={`text-sm font-rubik font-bold bg-none cursor-pointer ${_id === activeSubcat ? "text-gray-2" : "text-black"}`}>{subCatName}</button>
+                        <NavLink to={`/Category/${catName}/${subCatName}`}>
+                            <button onClick={() => updateContentsViaSubcat(_id, subCatName, catName)} className={`text-sm font-rubik font-bold bg-none cursor-pointer ${_id === activeSubcat ? "text-gray-2" : "text-black"}`}>{subCatName}</button>
+                        </NavLink>
                     </animated.div>
                 ))
             }

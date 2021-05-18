@@ -38,7 +38,7 @@ const Navigation = () => {
     })
 
 
-    useChain([burgerSpring, closeSpring, sideNavSpring], [0, ,0.2, 0])
+    useChain([burgerSpring, closeSpring, sideNavSpring], [0, 0.2, 0])
 
     return (
         <>
@@ -64,10 +64,10 @@ const Navigation = () => {
                 </div> 
 
                 <animated.div className="bg-white rounded-lg shadow-navShadow text-center absolute top-0 right-0 px-5 py-9 mx-auto w-full transform origin-top-right" style={animSideNav}>
-                    <Categories />
+                    <Categories setNavToggle={setNavToggle} />
                 </animated.div>
             </div>
-            {navToggle && <div className="bg-blackOpac w-full h-screen absolute top-0 left-0 z-20"></div>}
+            {navToggle && <div className="bg-blackOpac w-full h-screen absolute top-0 left-0 z-20" onClick={() => setNavToggle(!navToggle)}></div>}
         </>
     )
 }
