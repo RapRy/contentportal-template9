@@ -13,7 +13,7 @@ const Screenshots = ({ images }) => {
     }, [screenshotsContainer])
 
     return (
-        <div className="relative z-10 pt-7 px-5">
+        <div className="relative z-10 pt-9 px-5">
             <span className="float-right text-white text-sm font-rubik customMarginRight spanAfter">Screenshots</span>
             <div ref={screenshotsContainer} className="clear-right pt-5 overflow-x-hidden whitespace-nowrap cur">
                 {

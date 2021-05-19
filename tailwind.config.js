@@ -31,7 +31,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      margin: ['last']
+      margin: ['last'],
+      borderWidth: ['first'],
     },
   },
   plugins: [],

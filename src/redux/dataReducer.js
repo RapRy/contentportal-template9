@@ -9,10 +9,10 @@ const dataSlice = createSlice({
     },
     reducers: {
         fetchData: (state, action) => {
-            const { categories, contents } = action.payload
+            const { categories } = action.payload
 
             state.categories = categories
-            state.contents = contents
+            // state.contents = contents
         },
         updateContents: (state, action) => {
             state.contents = action.payload

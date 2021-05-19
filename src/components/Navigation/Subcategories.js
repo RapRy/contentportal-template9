@@ -33,7 +33,7 @@ const Subcategories = ({ cat, setActiveSubcat, activeSubcat, setNavToggle }) => 
         <div className={`${active === false ? "h-0" : "h-full"} relative block top-0 overflow-hidden`}>
             {
                 cat.subCategories.map(({ _id, subCatName, catName }) => (
-                    <animated.div key={_id} className="inline-block px-2.5 py-3.5" style={animation}>
+                    <animated.div key={_id} className="inline-block px-2.5 py-3.5 sm:py-1" style={animation}>
                         <NavLink to={`/Category/${catName}/${subCatName}`}>
                             <button onClick={() => updateContentsViaSubcat(_id, subCatName, catName)} className={`text-sm font-rubik font-bold bg-none cursor-pointer ${_id === activeSubcat ? "text-gray-2" : "text-black"}`}>{subCatName}</button>
                         </NavLink>
