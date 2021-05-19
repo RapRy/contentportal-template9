@@ -39,7 +39,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/Category/Games/Arcade" />
+            <Redirect to="/Category/Apps/Dating" />
           </Route>
           <Route exact path="/Category/:cat/:subcat">
             <Main />

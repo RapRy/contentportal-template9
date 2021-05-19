@@ -50,7 +50,7 @@ const Categories = ({ setNavToggle, isMobile }) => {
 
         if(catName != null){
             categories.forEach((cat, iCat) => {
-                const category = { ...cat, active: (catName === cat.catName) ? true : false }
+                const category = { ...cat, active: (catName === cat.catName) ? true : false, ['subCategories']: _.sortBy(cat.subCategories, 'subCatName') }
 
                 if(catName === cat.catName)
                     setActiveCat(category)
