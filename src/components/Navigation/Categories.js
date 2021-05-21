@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
-import _ from 'lodash'
-
 import { NavLink } from 'react-router-dom'
 
-import * as api from '../../api'
-import { updateContents, updateDetails } from '../../redux/dataReducer'
+import _ from 'lodash'
+
+import { updateDetails } from '../../redux/dataReducer'
 
 import Subcategories from './Subcategories'
 
 const Categories = ({ setNavToggle, isMobile }) => {
     const dispatch = useDispatch()
-    const { categories } = useSelector(state => state.data)
+    const { categories, selectedContent } = useSelector(state => state.data)
 
     const catMatch = useRouteMatch('/Category/:cat/:subcat') || { params: { cat: null } }
 
@@ -20,26 +19,19 @@ const Categories = ({ setNavToggle, isMobile }) => {
     const [newCats, setNewCats] = useState([])
     const [activeCat, setActiveCat] = useState({})
 
-    const updateContentList = async (catName, subcatName) => {
-        const { data } = await api.updateContentsViaCat(catName, subcatName)
-
-        dispatch(updateContents(data))
-    }
-
-    const showSubCats = (ind, catName, subcatName) => {
+    const showSubCats = (ind) => {
 
         let modCats = []
 
         newCats.forEach((cat, i) => {
             modCats.push({ ...newCats[i], ["active"]: i === ind ? true : false})
-        }) 
-
-        updateContentList(catName, subcatName)        
+        })   
 
         setActiveSubcat(modCats[ind].subCategories[0]._id)
         setNewCats(modCats)
 
-        dispatch(updateDetails([]))
+        if(!_.isEmpty(selectedContent))
+            dispatch(updateDetails([]))
     }
 
     useEffect(() => {
@@ -74,16 +66,18 @@ const Categories = ({ setNavToggle, isMobile }) => {
                     newCats.map((cat, i) => (
                         <div key={cat._id} className="sm:inline-block sm:border-l-2 sm:first:border-l-0 sm:border-gray-1">
                             <div className="block py-2.5 sm:py-1 px-5 relative top-0 left-0 z-20">
-                                <NavLink to={ `/Category/${cat.catName}/${cat.subCategories[0].subCatName}` }>
-                                    <button onClick={() => showSubCats(i, cat.catName, cat.subCategories[0].subCatName)} className={`font-rubik bg-none cursor-pointer font-bold text-xl ${cat.active === false ? "text-black" : "text-gray-2"}`}>{cat.catName}</button>
+                                <NavLink to={`/Category/${cat.catName}/${cat.subCategories[0].subCatName}`} onClick={() => showSubCats(i)}>
+                                    <button className={`font-rubik bg-none cursor-pointer font-bold text-xl ${cat.active === false ? "text-black" : "text-gray-2"}`}>{cat.catName}</button>
                                 </NavLink>
                             </div>
-                            { isMobile && <Subcategories cat={cat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} setNavToggle={setNavToggle} /> }
+                            { isMobile && <Subcategories cat={cat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} setNavToggle={setNavToggle} isMobile={isMobile} /> }
                         </div>
                     ))
                 }
             </div>
-            { !isMobile && !_.isEmpty(activeCat) &&  <Subcategories cat={activeCat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} setNavToggle={setNavToggle} />}
+            { !isMobile && !_.isEmpty(activeCat) &&  
+                <Subcategories cat={activeCat} setActiveSubcat={setActiveSubcat} activeSubcat={activeSubcat} setNavToggle={setNavToggle} isMobile={isMobile} />
+            }
         </>
     )
 }

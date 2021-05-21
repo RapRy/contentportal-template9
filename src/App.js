@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+
 import _ from 'lodash'
 
 import { fetchData } from './redux/dataReducer'
@@ -15,7 +16,7 @@ import Preview from './components/Preview/Preview'
 function App() {
 
   const dispatch = useDispatch()
-  const [test, set] = useState({})
+  const [category, set] = useState({})
 
   useEffect(() => {
     try {
@@ -36,14 +37,14 @@ function App() {
   }, [dispatch])
 
   return (
-    !_.isEmpty(test) &&
+    !_.isEmpty(category) &&
       <div>
         <Router>
           <Header />
           <Navigation />
           <Switch>
             <Route exact path="/">
-              <Redirect to={`/Category/${test.catName}/${test.subCategories[0].subCatName}`} />
+              <Redirect to={`/Category/${category.catName}/${category.subCategories[0].subCatName}`} />
             </Route>
             <Route exact path="/Category/:cat/:subcat">
               <Main />

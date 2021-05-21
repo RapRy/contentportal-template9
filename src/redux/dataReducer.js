@@ -12,7 +12,6 @@ const dataSlice = createSlice({
             const { categories } = action.payload
 
             state.categories = categories
-            // state.contents = contents
         },
         updateContents: (state, action) => {
             state.contents = action.payload

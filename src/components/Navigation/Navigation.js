@@ -21,27 +21,43 @@ const Navigation = () => {
     const animBurger = useSpring({
         ref: burgerSpring,
         to: { transform: navToggle ? 'scale(0)' : 'scale(1)' },
-        from: { transform: 'scale(1)', height: "54px" }
+        from: { transform: 'scale(1)', height: "54px" },
+        config: {
+            tension: 180,
+            friction: 28
+          }
     })
 
     const closeSpring = useSpringRef()
     const animClose = useSpring({
         ref: closeSpring,
         to: { transform: navToggle ? 'scale(1)' : 'scale(0)' },
-        from: { transform : 'scale(0)' }
+        from: { transform : 'scale(0)' },
+        config: {
+            tension: 180,
+            friction: 28
+          }
     })
 
     const sideNavSpring = useSpringRef()
     const animSideNav = useSpring({
         ref: sideNavSpring,
         to: { transform: navToggle ? 'scale(1)' : 'scale(0)' },
-        from: { transform : 'scale(0)', transformOrigin:  "99% top"}
+        from: { transform : 'scale(0)', transformOrigin:  "99% top"},
+        config: {
+            tension: 180,
+            friction: 28
+          }
     })
 
     const animSideNavDesktop = useSpring({
         ref: sideNavSpring,
         to: { x: isMobile ? "100%" : "50%", opacity: isMobile ? 0 : 1 },
-        from : { x: isMobile ? "50%" : "100%", opacity: isMobile ? 1 : 0 }
+        from : { x: isMobile ? "50%" : "100%", opacity: isMobile ? 1 : 0 },
+        config: {
+            tension: 180,
+            friction: 28
+          }
     })  
 
 

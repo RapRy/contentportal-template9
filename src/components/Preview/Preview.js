@@ -34,7 +34,7 @@ const Preview = () => {
     }, [id])
 
     return (
-            <div className="bg-white rounded-lg mx-5 py-5 relative overflow-hidden shadow-navShadow my-16 sm:mt-28">
+            <div className="bg-white rounded-lg mx-5 lg:mx-auto py-5 relative overflow-hidden shadow-navShadow my-16 sm:mt-28 max-w-screen-md">
                 <Link onClick={() => dispatch(updateDetails({}))} to={`/Category/${selectedContent.catName}/${selectedContent.subCatName}`} className="font-rubik text-lightRed text-sm font-bold pr-5 pb-7 float-right cursor-pointer">Close</Link>
                 <div className="clear-right relative z-10 minHeight-144">
                     <div className="absolute previewThumb rounded-lg shadow-contentShadow">
