@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Link } from 'react-router-dom'
+import { useSpring, animated } from 'react-spring'
 
 import * as api from '../../api'
 import { updateDetails } from '../../redux/dataReducer'
@@ -16,6 +17,15 @@ const Preview = () => {
     const { selectedContent } = useSelector(state => state.data)
     const dispatch = useDispatch()
     const { id } = useParams()
+
+    const animation = useSpring({
+        from: { opacity: 0, y: 50 },
+        to: { opacity: 1, y: 0 },
+        config: {
+            tension: 180,
+            friction: 28
+        }
+    })
 
     useEffect(() => {
 
@@ -34,7 +44,7 @@ const Preview = () => {
     }, [id])
 
     return (
-            <div className="bg-white rounded-lg mx-5 lg:mx-auto py-5 relative overflow-hidden shadow-navShadow my-16 sm:mt-28 max-w-screen-md">
+            <animated.div style={animation} className="bg-white rounded-lg mx-5 lg:mx-auto py-5 relative overflow-hidden shadow-navShadow my-16 sm:mt-28 max-w-screen-md">
                 <Link onClick={() => dispatch(updateDetails({}))} to={`/Category/${selectedContent.catName}/${selectedContent.subCatName}`} className="font-rubik text-lightRed text-sm font-bold pr-5 pb-7 float-right cursor-pointer">Close</Link>
                 <div className="clear-right relative z-10 minHeight-144">
                     <div className="absolute previewThumb rounded-lg shadow-contentShadow">
@@ -53,7 +63,7 @@ const Preview = () => {
                 { selectedContent.filename === "mp4" && <Video videoFile={videoFile} /> }
                 { selectedContent.filename === "mp3" && <Audio audioFile={audioFile} /> }
                 <div className="w-9/12 h-full block bg-darkRed absolute top-0 left-0 z-0"></div>
-            </div>
+            </animated.div>
     )
 }
 
