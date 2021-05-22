@@ -55,6 +55,9 @@ function App() {
             <Route exact path="/Search/:search">
               <Main />
             </Route>
+            <Route path="*">
+              <Redirect to={`/Category/${category.catName}/${category.subCategories[0].subCatName}`} />
+            </Route>
           </Switch>
         </Router>
       </div>
