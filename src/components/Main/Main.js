@@ -28,10 +28,11 @@ const Main = () => {
             const updateContentList = async (subcat, cat, search) => {
                 if(search !== undefined){
                     const { data } = await api.searchResult(search)
-                    dispatch(updateContents(data))
+                    dispatch(updateContents(data.contents))
                 }else{
                     const { data } = await api.updateContentsViaSubcat(subcat, cat)
-                    dispatch(updateContents(data))
+
+                    dispatch(updateContents(data.data))
                 }
 
             }

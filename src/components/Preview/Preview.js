@@ -33,7 +33,7 @@ const Preview = () => {
             const showDetails = async (id) => {
                 const { data } = await api.fetchDetails(id)
         
-                dispatch(updateDetails(data))
+                dispatch(updateDetails(data.content))
             }
 
             showDetails(id)

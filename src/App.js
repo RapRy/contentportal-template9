@@ -21,11 +21,13 @@ function App() {
   useEffect(() => {
     try {
       const fetchInitial = async () => {
-        const { data } = await api.fetchData('Apps')
+        const { data } = await api.fetchData()
 
-        set(data.activeCat)
+        const activeCat = data.categories.filter((cat) => cat.catName === "Games")
+
+        set(activeCat[0])
     
-        dispatch(fetchData(data))
+        dispatch(fetchData({ categories: data.categories }))
       }
 
       fetchInitial()

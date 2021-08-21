@@ -17,7 +17,7 @@ const Screenshots = ({ images }) => {
             <span className="float-right text-white text-sm font-rubik customMarginRight spanAfter">Screenshots</span>
             <div ref={screenshotsContainer} className="clear-right pt-5 overflow-x-hidden whitespace-nowrap cur">
                 {
-                    images.map((image, i) => <img className="w-11/12 lg:w-8/12 inline-block mr-3 last:mr-0" key={i} src={image} alt={`screenshot-${i + 1}`} />)
+                    images.map((image, i) => <img className="w-11/12 lg:w-8/12 inline-block mr-3 last:mr-0 max-h-20" key={i} src={image} alt={`screenshot-${i + 1}`} />)
                 }
             </div>
             <div className="w-9/12 pr-2.5 pt-2">
